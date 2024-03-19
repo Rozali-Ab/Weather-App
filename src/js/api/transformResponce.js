@@ -1,24 +1,3 @@
-export const debounce = (fn, delay) => {
-  let timer;
-
-  return (...args) => {
-    clearTimeout(timer);
-    return new Promise((resolve) => {
-      timer = setTimeout(() => {
-        resolve(fn(...args));
-      }, delay);
-    });
-  };
-};
-
-const convertToKm = (m) => {
-  return m/1000;
-};
-
-const convertPressureToMmHg = (pressure) => {
-  return (pressure * 0.75006).toFixed(0);
-};
-
 export const transformResponce = (data) => {
   const weather = {
     city: (data && data.name) || '',
@@ -34,3 +13,10 @@ export const transformResponce = (data) => {
   return weather;
 };
 
+const convertToKm = (m) => {
+  return m/1000;
+};
+
+const convertPressureToMmHg = (pressure) => {
+  return (pressure * 0.75006).toFixed(0);
+};
