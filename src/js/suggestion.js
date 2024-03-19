@@ -1,7 +1,7 @@
-import { getCitySuggestion } from './api.js';
-import { debounce } from './utils.js';
+import { getCitySuggestion } from './api/api.js';
+import { debounce } from './utils/debounce.js';
 
-import { DELAY_SUGGESTION } from './const.js';
+import { DELAY_SUGGESTION } from './constants/const.js';
 
 const renderSuggestContainer = (suggestList) => {
   const form = document.querySelector('#search-form');

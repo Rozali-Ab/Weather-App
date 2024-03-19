@@ -1,4 +1,4 @@
-import { getCityListFromLocalStorage } from './local-storage.js';
+import { getCityListFromLocalStorage } from './store/localStore.js';
 
 const main = document.querySelector('#main');
 

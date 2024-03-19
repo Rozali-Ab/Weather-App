@@ -1,10 +1,9 @@
-import { getWeatherByLocation, getWeatherByCity } from './api.js';
+import { getWeatherByLocation, getWeatherByCity } from './api/api.js';
 import { delayedSuggestion, removeSuggestContainer } from './suggestion.js';
-import { renderCityList } from './city-list.js';
 import { renderWetherDetais } from './weather-details.js';
-import { saveCityListToLocalStorage, saveLocationToLocalStorage, saveWeatherToLocalStorage } from './local-storage.js';
+import { saveCityListToLocalStorage, saveLocationToLocalStorage, saveWeatherToLocalStorage } from './store/localStore.js';
 
-import { store } from './store.js';
+import { store } from './store/store.js';
 
 const main = document.querySelector('#main');
 

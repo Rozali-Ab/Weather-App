@@ -1,6 +1,6 @@
-import { transformResponce } from './utils.js';
-import { URL, API_KEY, SUGGESTION_API, SUGGESTION_API_KEY } from '../../config.js';
-import { DEFAULT_LOCATION  } from './const.js';
+import { transformResponce } from './transformResponce.js';
+import { URL, API_KEY, SUGGESTION_API, SUGGESTION_API_KEY } from '../../../config.js';
+import { DEFAULT_LOCATION  } from '../constants/const.js';
 
 const url = URL;
 const key = API_KEY;
@@ -50,10 +50,11 @@ export const getCitySuggestion = async (query) => {
     }
 
     const data = await response.json();
-
+    console.log(data);
     return data;
   } catch (error) {
     return null;
   }
 };
+
 
