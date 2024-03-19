@@ -1,4 +1,4 @@
-//import { transformResponce } from './utils.js';
+import { transformResponce } from './utils.js';
 import { URL, API_KEY, SUGGESTION_API, SUGGESTION_API_KEY } from '../../config.js';
 import { DEFAULT_LOCATION  } from './const.js';
 
@@ -18,8 +18,9 @@ export const getWeatherByLocation = async (location) => {
 
     const data = await response.json();
 
-    console.log(data);
-    return data;
+    const tranformedData = transformResponce(data);
+    //console.log(data);
+    return tranformedData;
   } catch (err) {
     console.error(err);
   }
@@ -33,8 +34,9 @@ export const getWeatherByCity = async (query) => {
     }
 
     const data = await response.json();
-
-    return data;
+    const tranformedData = transformResponce(data);
+    //console.log(data);
+    return tranformedData;
   } catch(error) {
     console.error(error);
   }
