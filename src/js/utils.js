@@ -24,10 +24,8 @@ export const transformResponce = (data) => {
     city: (data && data.name) || '',
     description: (data.weather && data.weather[0] && data.weather[0].description) || '',
     clouds: (data.clouds && `${data.clouds.all} %`) || '',
-    temp: {
-      celsius: `${(data.main.temp).toFixed(0)}°`,
-      feelsLike: `${(data.main.feels_like).toFixed(0)}°`,
-    },
+    temp: `${(data.main.temp).toFixed(0)}°`,
+    feelsLike: `${(data.main.feels_like).toFixed(0)}°`,
     visibility: `${convertToKm(data.visibility)} км` || '',
     wind: `${(data.wind.speed).toFixed(0)} м/с` || '',
     pressure: `${convertPressureToMmHg(data.main.pressure)} мм рт. ст.` || '',

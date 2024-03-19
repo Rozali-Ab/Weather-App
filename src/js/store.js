@@ -1,4 +1,6 @@
 import { localStore, localStorageModule, getWeatherFromLocalStorage, getCityListFromLocalStorage, getLocationFromLocalStorage } from './local-storage.js';
+import { renderCityList } from './city-list.js';
+import { renderWetherDetais } from './weather-details.js';
 
 export const store = {
   currentWeather: {},
@@ -7,7 +9,7 @@ export const store = {
   isGeoLocated: false,
 };
 
-export const initStore = () => {
+export const initStore = async () => {
   store.currentWeather = getWeatherFromLocalStorage();
   store.currentGeo = getLocationFromLocalStorage();
   store.cityList = getCityListFromLocalStorage();
@@ -27,6 +29,9 @@ export const initStore = () => {
     localStorageModule.saveData(localStore.cityList, '');
     store.cityList = [];
   }
+
+  renderCityList(store.cityList);
+  renderWetherDetais(store.currentWeather);
 
   return store;
 };

@@ -1,6 +1,7 @@
 import { getWeatherByLocation, getWeatherByCity } from './api.js';
-import { delayedSuggestion, removeSuggestContainer } from './suggestions.js';
+import { delayedSuggestion, removeSuggestContainer } from './suggestion.js';
 import { renderCityList } from './city-list.js';
+import { renderWetherDetais } from './weather-details.js';
 import { saveCityListToLocalStorage, saveLocationToLocalStorage, saveWeatherToLocalStorage } from './local-storage.js';
 
 import { store } from './store.js';
@@ -67,11 +68,9 @@ const onClickFindMeBtn = () => {
       .then((weather) => {
         store.currentWeather = weather;
         saveWeatherToLocalStorage(store.currentWeather);
-
-        
-        //рендер какое-то главное окно погоды
+        console.log(weather);
+        renderWetherDetais(weather);
       })
-    
   } catch(error) {
     console.error(error)
    // рисуем какое-то сообщение 
@@ -100,7 +99,7 @@ const onFormSubmit = async (evt) => {
         store.cityList.push(weather);
         saveWeatherToLocalStorage(store.currentWeather);
         saveCityListToLocalStorage(store.cityList);
-        renderCityList();
+        renderWetherDetais(weather)
       }
 
   } catch (err) {

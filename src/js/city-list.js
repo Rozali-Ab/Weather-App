@@ -15,16 +15,20 @@ export const renderCityList = () => {
   const listContainer = document.createElement('section');
   listContainer.className = 'city-list';
 
+  const ul = document.createElement('ul');
+  ul.textContent = 'city list';
+
   if (Array.isArray(list)) {
     list.map((item) => {
       const card = renderCityCard(item);
-      listContainer.appendChild(card);
+      ul.appendChild(card);
     });
   } else {
     const card = renderCityCard(list);
-    listContainer.appendChild(card);
+    ul.appendChild(card);
   }
 
+  listContainer.appendChild(ul);
   main.appendChild(listContainer);
 };
 
@@ -32,17 +36,22 @@ export const renderCityList = () => {
 const renderCityCard = (item) => {
   const {
     city, 
+    temp,
   } = item;
+
+  const li = document.createElement('li');
+
   const cityCard = document.createElement('div');
   cityCard.className = 'city-card';
 
-  const cityName = document.createElement('span');
+  const cityName = document.createElement('li');
   cityName.className = 'city-name';
-  cityName.textContent = city;
+  cityName.textContent = `${city} ${temp}`;
 
   cityCard.appendChild(cityName);
+  li.appendChild(cityCard);
 
-  return cityCard;
+  return li;
 };
 // СОБЫТИЕ УДАЛЕНИЯ КАРТОЧКИ и из локала и стора
 //онлик и рисовать какой-то main-weather погоду подробно и свежий запрос погоды
