@@ -34,6 +34,9 @@ export const getWeatherFromLocalStorage = () => {
 };
 
 export const saveCityListToLocalStorage = (cityList) => {
+  if (cityList.length === 0) {
+    localStorageModule.clearData(localStore.cityList);
+  }
   localStorageModule.saveData(localStore.cityList, cityList);
 };
 
