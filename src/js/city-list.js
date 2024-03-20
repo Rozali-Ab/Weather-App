@@ -1,4 +1,6 @@
-import { getCityListFromLocalStorage } from './store/localStore.js';
+import { getCityListFromLocalStorage, saveCityListToLocalStorage, saveWeatherToLocalStorage } from './store/localStore.js';
+import { renderWetherDetais } from './weather-details.js';
+import { store } from './store/store.js';
 
 const main = document.querySelector('#main');
 
@@ -44,14 +46,46 @@ const renderCityCard = (item) => {
   const cityCard = document.createElement('div');
   cityCard.className = 'city-card';
 
-  const cityName = document.createElement('li');
+  const cityName = document.createElement('span');
   cityName.className = 'city-name';
   cityName.textContent = `${city} ${temp}`;
 
+  const deleteBtn = document.createElement('button');
+  deleteBtn.textContent = 'Х';
+
   cityCard.appendChild(cityName);
+  cityCard.appendChild(deleteBtn);
   li.appendChild(cityCard);
+
+  deleteBtn.addEventListener('click', () => {
+    deleteCityCard(item);
+    li.remove();
+  });
+
+  li.addEventListener('click', async () => {
+    onClickCityCard(item);
+  });
 
   return li;
 };
-// СОБЫТИЕ УДАЛЕНИЯ КАРТОЧКИ и из локала и стора
-//онлик и рисовать какой-то main-weather погоду подробно и свежий запрос погоды
+
+const onClickCityCard = (cityCard) => {
+  store.currentWeather = cityCard;
+  renderWetherDetais(cityCard);
+  saveWeatherToLocalStorage(cityCard);
+};
+
+const deleteCityCard = (card) => {
+  if (store.cityList.length === 0) {
+    saveCityListToLocalStorage();
+    return;
+  };
+  
+  const index = store.cityList.findIndex(city => city.id === card.id);
+  console.log(index)
+  if (index !== -1) {
+    store.cityList.splice(index, 1);
+    
+    saveCityListToLocalStorage(store.cityList);
+  }
+};
