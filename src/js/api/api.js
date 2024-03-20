@@ -1,48 +1,68 @@
+import { URL_MAIN, URL_MAIN_KEY, URL_SUGGESTION } from './keys.js';
 import { transformResponce } from './transformResponce.js';
-import { DEFAULT_LOCATION  } from '../constants/const.js';
-
-const url = 'https://api.openweathermap.org/data/2.5/weather?';
-const key = '80c8f308f64f79052a0be055b0e3c826';
+import { DEFAULT_LOCATION } from '../constants/const.js';
 
 export const getWeatherByLocation = async (location) => {
-  let {lon, lat} = location ?? DEFAULT_LOCATION ;
+  let { lon, lat } = location ?? DEFAULT_LOCATION;
+
+  const params = new URLSearchParams({
+    lat: lat,
+    lon: lon,
+    appid: URL_MAIN_KEY,
+    units: 'metric',
+    lang: 'ru',
+  });
+  const url = `${URL_MAIN}${(params.toString())}`
 
   try {
-    const response = await fetch(`${url}lat=${lat}&lon=${lon}&appid=${key}&units=metric&lang=ru`);
+    const response = await fetch(url);
     if (!response.ok) {
       throw new Error(response.message);
     }
 
     const data = await response.json();
 
-    const tranformedData = transformResponce(data);
-
-    return tranformedData;
+    return transformResponce(data);
   } catch (err) {
     console.error(err);
   }
 };
 
 export const getWeatherByCity = async (query) => {
+  const params = new URLSearchParams({
+    q: query,
+    appid: URL_MAIN_KEY,
+    units: 'metric',
+    lang: 'ru',
+  });
+  const url = `${URL_MAIN}${(params.toString())}`;
+
   try {
-    const response = await fetch(`${url}q=${query}&appid=${key}&units=metric&lang=ru`);
+    const response = await fetch(url);
     if (!response.ok) {
       throw new Error(response.message);
     }
 
     const data = await response.json();
-    const tranformedData = transformResponce(data);
 
-    return tranformedData;
-  } catch(error) {
+    return transformResponce(data);
+  } catch (error) {
     console.error(error);
   }
 };
 
 export const getCitySuggestion = async (query) => {
+  const params = new URLSearchParams({
+    name: query,
+    count: 5,
+    language: 'ru',
+    format: 'json',
+  });
+  const url = `${URL_SUGGESTION}${(params.toString())}`;
+
   try {
-    const response = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${query}&count=5&language=ru&format=json`);
-    if(!response.ok) {
+    const response = await fetch(url);
+    if (!response.ok) {
       return null;
     }
 
