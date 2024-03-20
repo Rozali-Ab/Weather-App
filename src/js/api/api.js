@@ -1,11 +1,8 @@
 import { transformResponce } from './transformResponce.js';
-import { URL, API_KEY, SUGGESTION_API, SUGGESTION_API_KEY } from '../../../config.js';
 import { DEFAULT_LOCATION  } from '../constants/const.js';
 
-const url = URL;
-const key = API_KEY;
-const suggestUrl = SUGGESTION_API;
-const suggestKey = SUGGESTION_API_KEY;
+const url = 'https://api.openweathermap.org/data/2.5/weather?';
+const key = '80c8f308f64f79052a0be055b0e3c826';
 
 export const getWeatherByLocation = async (location) => {
   let {lon, lat} = location ?? DEFAULT_LOCATION ;
@@ -19,7 +16,7 @@ export const getWeatherByLocation = async (location) => {
     const data = await response.json();
 
     const tranformedData = transformResponce(data);
-    //console.log(data);
+
     return tranformedData;
   } catch (err) {
     console.error(err);
@@ -35,7 +32,7 @@ export const getWeatherByCity = async (query) => {
 
     const data = await response.json();
     const tranformedData = transformResponce(data);
-    //console.log(data);
+
     return tranformedData;
   } catch(error) {
     console.error(error);
@@ -44,17 +41,15 @@ export const getWeatherByCity = async (query) => {
 
 export const getCitySuggestion = async (query) => {
   try {
-    const response = await fetch(`${suggestUrl}text=${query}&type=locality&apikey=${suggestKey}`);
+    const response = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${query}&count=5&language=ru&format=json`);
     if(!response.ok) {
       return null;
     }
 
     const data = await response.json();
-    console.log(data);
-    return data;
+
+    return data.results;
   } catch (error) {
     return null;
   }
 };
-
-
