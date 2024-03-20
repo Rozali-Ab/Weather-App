@@ -4,6 +4,7 @@ import { renderWetherDetais } from './weather-details.js';
 import { saveCityListToLocalStorage, saveLocationToLocalStorage, saveWeatherToLocalStorage } from './store/localStore.js';
 
 import { store } from './store/store.js';
+import { renderCityList } from './city-list.js';
 
 const main = document.querySelector('#main');
 
@@ -96,9 +97,11 @@ const onFormSubmit = async (evt) => {
       if (weather) {
         store.currentWeather = weather;
         store.cityList.push(weather);
-        saveWeatherToLocalStorage(store.currentWeather);
+
+        saveWeatherToLocalStorage(weather);
         saveCityListToLocalStorage(store.cityList);
-        renderWetherDetais(weather)
+        renderCityList();
+        renderWetherDetais(weather);
       }
 
   } catch (err) {
