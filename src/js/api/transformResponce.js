@@ -8,8 +8,9 @@ export const transformResponce = (data) => {
     visibility: `${convertToKm(data.visibility)} км` || '',
     wind: `${(data.wind.speed).toFixed(0)} м/с` || '',
     pressure: `${convertPressureToMmHg(data.main.pressure)} мм рт. ст.` || '',
+    id: data.id || '',
   }
-  console.log(weather)
+  //console.log(weather)
   return weather;
 };
 
