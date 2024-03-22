@@ -1,4 +1,4 @@
-export const transformResponce = (data) => {
+export const transformResponse = (data) => {
   const weather = {
     city: (data && data.name) || '',
     description: (data.weather && data.weather[0] && data.weather[0].description) || '',
