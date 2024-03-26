@@ -1,13 +1,15 @@
 import './styles/scss/_index.scss';
+import './index.html'
 
+import { renderWeatherDetails } from "./js/components/weatherDetails/weatherDetails";
+import { renderCityList } from "./js/components/sityList/cityList";
 import { initStore } from './js/store/store.js';
-import { renderSearchSection } from './js/search.js';
-import { renderWetherDetais } from './js/weather-details.js';
-import { renderCityList } from './js/city-list.js';
+import { addFindMeEvent } from "./js/components/search/findMeBtn";
+import { searchController } from './js/components/search/search.js';
 
-document.addEventListener("DOMContentLoaded", async () => {
-  renderSearchSection();
-  const { cityList, currentWeather } = await initStore();
-  renderCityList(cityList);
-  renderWetherDetais(currentWeather);
-});
+const { cityList, currentWeather } = await initStore();
+
+searchController();
+addFindMeEvent();
+renderCityList(cityList);
+renderWeatherDetails(currentWeather);
