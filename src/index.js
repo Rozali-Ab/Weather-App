@@ -7,9 +7,9 @@ import { initStore } from './js/store/store.js';
 import { addFindMeEvent } from "./js/components/search/findMeBtn";
 import { searchController } from './js/components/search/search.js';
 
-const { cityList, currentWeather } = await initStore();
+await initStore();
 
 searchController();
 addFindMeEvent();
-renderCityList(cityList);
-renderWeatherDetails(currentWeather);
+renderCityList();
+renderWeatherDetails();

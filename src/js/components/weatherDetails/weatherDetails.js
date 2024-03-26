@@ -1,8 +1,15 @@
 import { store } from "../../store/store";
 import { renderCityList } from "../sityList/cityList";
-import { saveCityListToLocalStorage, saveWeatherToLocalStorage } from "../../store/localStore";
+import {
+  getWeatherFromLocalStorage,
+  saveCityListToLocalStorage,
+  saveWeatherToLocalStorage
+} from "../../store/localStore";
 
-export const renderWeatherDetails = (weather) => {
+export const renderWeatherDetails = () => {
+
+  const weather = getWeatherFromLocalStorage();
+
   if (!weather || Object.keys(weather).length === 0) return;
 
   const container = document.querySelector('.weather-details');
@@ -20,10 +27,10 @@ export const renderWeatherDetails = (weather) => {
 
 const onClickAddBtn = (city) => {
   store.cityList.push(city);
-  saveWeatherToLocalStorage(city);
   saveCityListToLocalStorage(store.cityList);
+  saveWeatherToLocalStorage(city);
   renderCityList();
-  renderWeatherDetails(city);
+  renderWeatherDetails();
 }
 const isSavedCity = (id) => {
   return store.cityList.some((city) => city.id === id);

@@ -24,8 +24,8 @@ export const renderCityCard = (city) => {
 
 const onClickCityCard = (cityCard) => {
   store.currentWeather = cityCard;
-  renderWeatherDetails(cityCard);
   saveWeatherToLocalStorage(cityCard);
+  renderWeatherDetails();
   renderCityList();
 };
 
@@ -42,7 +42,7 @@ const onDeleteCityCard = (card) => {
 
     saveCityListToLocalStorage(store.cityList);
   }
-
+  renderWeatherDetails();
   renderCityList();
 };
 
