@@ -20,13 +20,13 @@ export const getWeatherByLocation = async (location) => {
   try {
     const response = await fetch(url);
     if (!response.ok) {
-      throw new Error(response.message);
+      new Error('Не удалось получить данные о погоде');
     }
 
     const data = await response.json();
     return transformResponse(data);
   } catch (err) {
-    console.error(err);
+    throw new Error('Не удалось получить данные о погоде');
   }
 };
 
@@ -42,13 +42,13 @@ export const getWeatherByCity = async (query) => {
   try {
     const response = await fetch(url);
     if (!response.ok) {
-      throw new Error(response.message);
+      new Error('По Вашему запросу погода не найдена');
     }
 
     const data = await response.json();
     return transformResponse(data);
-  } catch (error) {
-    console.error(error);
+  } catch (err) {
+    throw err;
   }
 };
 
