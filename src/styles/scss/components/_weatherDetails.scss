@@ -1,0 +1,68 @@
+.weather-details {
+  padding: 0.5rem;
+  background-image: linear-gradient(to top right, rgba(145, 190, 243, 0.27), rgba(238, 174, 202, 0.33));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: rgba(238, 174, 202, 0.19);
+  border-radius: 10px;
+  .weather {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0.5rem;
+    &__add {
+      flex-direction: row-reverse;
+      color: blue;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    &-name {
+      flex-direction: column;
+      align-items: center;
+      &__name {
+        font-size: 3rem;
+      }
+      &__district {
+
+      }
+    }
+    &-temp {
+      flex-direction: column;
+      align-items: center;
+      &__now {
+        font-size: 4rem;
+      }
+      &__feels {
+
+      }
+    }
+    &-description {
+      flex-direction: column;
+      flex-wrap: wrap;
+      &__clouds {
+        flex-grow: 1;
+
+      }
+      &__wind {
+        flex: 1 1 calc(100% / 3);
+        flex-direction: column;
+        align-items: center;
+      }
+      &__visibility {
+        flex: 1 1 calc(100% / 3);
+        flex-direction: column;
+        align-items: center;
+      }
+      &__pressure {
+        flex: 1 1 calc(100% / 3);
+        flex-direction: column;
+        align-items: center;
+      }
+      &__wrapper {
+        justify-content: space-between;
+      }
+    }
+
+  }
+}
