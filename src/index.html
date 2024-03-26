@@ -1,14 +1,42 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Weather App</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
 </head>
 <body>
-  <header>
-    <h1>Глаааавнеееей всегооооо погода в доооомеее</h1>
-  </header>
-  <main class="main" id="main"></main>
+<header>
+    <h4>Погода сегодня</h4>
+</header>
+<main class="main" id="main">
+    <div class="container">
+        <section class="weather-details">
+        </section>
+        <section class="search">
+            <form class="search-form">
+                <label for="search_input">
+                    <input
+                            type="text"
+                            class="search-form__input"
+                            placeholder="Введите название населенного пункта"
+                            id="search_input"
+                    />
+                </label>
+            </form>
+            <button class="search-btn find-me">Найти меня</button>
+            <div class="search-list"></div>
+        </section>
+
+        <section class="city-list">
+            <div class="city-list-wrapper">
+            </div>
+        </section>
+
+        <div class="error">
+            <p>error.message</p>
+        </div>
+    </div>
+</main>
 </body>
 </html>
