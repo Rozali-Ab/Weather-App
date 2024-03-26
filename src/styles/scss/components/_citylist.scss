@@ -1,0 +1,35 @@
+.city-list {
+  &-wrapper {
+    display: flex;
+    flex-direction: column;
+
+
+    .city {
+      cursor: pointer;
+      padding: 0.5rem;
+      margin: 0.3rem;
+      width: 80wh;
+      border-radius: 10px;
+      background-image: linear-gradient(to top right, rgba(145, 190, 243, 0.94), rgba(231, 16, 110, 0.33));
+      &-description {
+        flex-direction: column;
+        width: 70%;
+        &__name {
+          font-size: 1.5rem;
+        }
+      }
+      &-temp {
+        width: 30%;
+        font-size: 1.5rem;
+        align-items: baseline;
+      }
+
+      .remover {
+        background-color: #f51a1a;
+        border-radius: 10px;
+        width: 50px;
+        align-items: center;
+      }
+    }
+  }
+}
