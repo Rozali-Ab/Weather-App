@@ -1,4 +1,4 @@
-import { transformResponse } from './transformResponse.js';
+import { transformResponse, transformSuggestion } from './transformResponse.js';
 import { DEFAULT_LOCATION } from '../constants/const.js';
 
 const URL_MAIN = process.env.URL_MAIN;
@@ -24,7 +24,6 @@ export const getWeatherByLocation = async (location) => {
     }
 
     const data = await response.json();
-
     return transformResponse(data);
   } catch (err) {
     console.error(err);
@@ -47,7 +46,6 @@ export const getWeatherByCity = async (query) => {
     }
 
     const data = await response.json();
-
     return transformResponse(data);
   } catch (error) {
     console.error(error);
@@ -70,8 +68,7 @@ export const getCitySuggestion = async (query) => {
     }
 
     const data = await response.json();
-
-    return data.results;
+    return transformSuggestion(data);
   } catch (error) {
     return null;
   }
