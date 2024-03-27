@@ -45,7 +45,8 @@ const weatherDetailsTemplate = (weather) => {
     wind,
     visibility,
     pressure,
-    id
+    id,
+    timeOfDay
   } = weather;
 
   const addToListBtn = isSavedCity(id)
@@ -54,14 +55,14 @@ const weatherDetailsTemplate = (weather) => {
 
   return (
     `
-    <div class="weather">
+    <div class="weather ${timeOfDay}">
       ${addToListBtn}
       <div class="weather-name">
         <span class="weather-name__name">${city}</span>
       </div>
       <div class="weather-temp">
-        <span class="weather-temp__now">${temp}C</span>
-        <span class="weather-temp__feels">Ощущается как ${feelsLike}C</span>
+        <span class="weather-temp__now">${temp}</span>
+        <span class="weather-temp__feels">Ощущается как ${feelsLike}</span>
       </div>
       <div class="weather-description">
         <div class="weather-description__clouds">

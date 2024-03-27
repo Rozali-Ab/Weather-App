@@ -1,16 +1,14 @@
 .weather-details {
-  padding: 0.5rem;
-  background-image: linear-gradient(to top right, rgba(145, 190, 243, 0.27), rgba(238, 174, 202, 0.33));
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: rgba(238, 174, 202, 0.19);
-  border-radius: 10px;
+
   .weather {
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 0.5rem;
+    border-radius: 10px;
     &__add {
       flex-direction: row-reverse;
       color: blue;
