@@ -10,7 +10,7 @@ export const renderCityCard = (city) => {
   const lastCityElement = container.lastElementChild;
   const btnDelete = lastCityElement.querySelector('.remover');
 
-  lastCityElement.addEventListener('click', async (evt) => {
+  lastCityElement.addEventListener('click', async () => {
     await onClickCityCard(city);
   });
 
@@ -75,7 +75,10 @@ const cityTemplate = (cityCard) => {
                 </span>
             </div>
             <div class="city-icon">
-                <img src="https://openweathermap.org/img/wn/${icon}.png"/>
+                <img 
+                    src="https://openweathermap.org/img/wn/${icon}.png"
+                    alt="weather"
+                />
             </div>
             <div class="remover ">
                 <span class="remover__span">X</span>
