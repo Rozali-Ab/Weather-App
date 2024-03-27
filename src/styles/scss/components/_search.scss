@@ -1,13 +1,15 @@
 .search {
-  padding: 0.5rem;
+  margin: 1rem 0;
   &-form {
+    padding: 0;
     &__input {
-      width: 80%;
+      width: 90vw;
       max-width: 400px;
-      height: 25px;
+      height: 30px;
       border-radius: 10px;
       border: none;
-      background-color: rgba(255, 255, 255, 0.3);
+      background-color: rgba(255, 255, 255, 0.15);
+      padding: 0 0.3rem;
     }
   }
   &-btn {
@@ -20,8 +22,11 @@
     padding: 0.5rem;
     .suggestion {
       height: 1.5rem;
-      color: rgba(0, 0, 0, 0.66);
       cursor: pointer;
+      &__flag {
+        width: 1.4rem;
+        height: 1rem;
+      }
     }
   }
 }
