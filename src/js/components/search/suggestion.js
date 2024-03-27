@@ -52,10 +52,7 @@ export const onClickSuggest = async (suggest) => {
     const weather = await getWeatherByLocation(location);
     if (weather) {
       store.currentWeather = weather;
-      //store.cityList.push(weather);
       saveWeatherToLocalStorage(weather);
-      //saveCityListToLocalStorage(store.cityList);
-      //renderCityList();
       renderWeatherDetails(weather);
     }
   } catch (error) {
@@ -65,16 +62,21 @@ export const onClickSuggest = async (suggest) => {
   removeSuggest();
 };
 
-const suggestTemplate = ({ city, district }) => {
+const suggestTemplate = ({ city, district, country }) => {
   return (
     `
       <div class="suggestion">
         <span class="suggestion__city">
-            ${city},
+            ${city}
         </span>
         <span class="suggestion__district">
-            ${district}
-        </span>
+            , ${district} 
+          </span>
+        <img
+            class="suggestion__flag"
+            src="https://openweathermap.org/images/flags/${country}.png" 
+             alt="flag"
+        />
       </div>
     `
   )
