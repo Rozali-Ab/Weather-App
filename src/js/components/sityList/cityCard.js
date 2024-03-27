@@ -50,20 +50,20 @@ const cityTemplate = (cityCard) => {
   const {
     id,
     city,
-    time,
+
     description,
-    temp
+    temp,
+    icon,
+    timeOfDay
   } = cityCard;
+
 
   return (
     `
-        <div class="city" data-id="${id}">
+        <div class="city ${timeOfDay}" data-id="${id}">
             <div class="city-description">
                 <span class="city-description__name">
                     ${city}
-                </span>
-                <span class="city-description__time">
-                    ${time}
                 </span>
                 <span class="city-description__description">
                     ${description}
@@ -71,11 +71,14 @@ const cityTemplate = (cityCard) => {
             </div>
             <div class="city-temp">
                 <span class="city-temp__now">
-                    ${temp}C
+                    ${temp}
                 </span>
             </div>
-            <div class="remover">
-                <span class="remover__span">Удалить</span>
+            <div class="city-icon">
+                <img src="https://openweathermap.org/img/wn/${icon}.png"/>
+            </div>
+            <div class="remover ">
+                <span class="remover__span">X</span>
             </div>
       </div>
     `
