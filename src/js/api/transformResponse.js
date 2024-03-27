@@ -1,7 +1,7 @@
 export const transformResponse = (data) => {
   return {
     city: (data && data.name) || '',
-    description: (data.weather && data.weather[0] && data.weather[0].description) || '',
+    description: getFirstCharToUpperCase((data.weather && data.weather[0] && data.weather[0].description)) || '',
     // clouds: (data.clouds && `${data.clouds.all} %`) || '',
     temp: `${(data.main.temp).toFixed(0)}°`,
     feelsLike: `${(data.main.feels_like).toFixed(0)}°`,
@@ -9,7 +9,8 @@ export const transformResponse = (data) => {
     wind: `${(data.wind.speed).toFixed(0)} м/с` || '',
     pressure: `${convertPressureToMmHg(data.main.pressure)} мм рт. ст.` || '',
     id: data.id || '',
-    time: data.time || ''
+    icon: data.weather[0].icon || '02d',
+    timeOfDay: getTimeOfDay(data.weather[0].icon) || 'none',
   }
 };
 
@@ -21,7 +22,7 @@ export const transformSuggestion = (data) => {
   return data.results.map(result => ({
     city: result.name,
     district: result.admin1 || '',
-    country: result.country_code || '',
+    country: (result.country_code).toLowerCase() || '',
     lat: result.latitude,
     lon: result.longitude
   }));
@@ -34,3 +35,11 @@ const convertToKm = (m) => {
 const convertPressureToMmHg = (pressure) => {
   return (pressure * 0.75006).toFixed(0);
 };
+
+const getTimeOfDay = (string) => {
+  return string.includes('d') ? 'day' : 'night';
+}
+
+const getFirstCharToUpperCase = (string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
