@@ -1,0 +1,99 @@
+html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-size: calc(100vw / 1920 * 20);
+  background-color: #000;
+  font-family: "Roboto";
+  color: white;
+  body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    main {
+      flex: 1;
+    }
+    footer {
+      flex-shrink: 0;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+  }
+  div {
+    display: flex;
+  }
+
+  .toast {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: inline-flex;
+    width: 30%;
+    margin-bottom: 0.4em;
+    padding: 0.4em;
+    border-radius: 0.2em;
+    background-color: rgba(255, 238, 238, 0.38);
+    color: rgba(37, 9, 23, 0.62);
+
+  }
+
+  .hidden {
+    visibility: hidden;
+  }
+
+
+  @media (max-width: 1024px) {
+    font-size: calc(100vw / 768 * 10);
+  }
+
+  @media (max-width: 767px) {
+    font-size: calc(100vw / 500 * 10);
+  }
+
+  @media (max-width: 500px) {
+    font-size: calc(100vw / 375 * 10);
+  }
+
+
+}
+
+
+
+.container {
+
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-direction: column;
+
+  .day {
+    background-image: linear-gradient(to top right, #f88fbd, #f5b951);
+  }
+
+  .night {
+    background-image: linear-gradient(#91BEF3, #48355B);
+  }
+
+
+  @media (min-width: 1024px) {
+
+  }
+
+  @media (min-width: 767px) {
+
+  }
+
+}
+
+
+@media (min-width: 544px) {
+
+}
+
+@media (min-width: 768px) {
+
+}
+
+
+
+//320 px, 480 px, 768 px, 960 px, 1200 px, 1600px.
