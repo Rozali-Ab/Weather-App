@@ -24,24 +24,31 @@ html {
   }
 
   .toast {
+    justify-content: center;
     position: fixed;
-    top: 50%;
     left: 50%;
+    bottom: 2%;
     transform: translate(-50%, -50%);
-    display: inline-flex;
-    width: 30%;
+    width: 80%;
+    max-width: 590px;
     margin-bottom: 0.4em;
     padding: 0.4em;
-    border-radius: 0.2em;
-    background-color: rgba(255, 238, 238, 0.38);
-    color: rgba(37, 9, 23, 0.62);
-
+    border-radius: 16px;
+    background-color: rgb(49, 48, 48);
+    color: rgba(253, 253, 253, 0.62);
+    font-size: 1.5rem;
+    & button {
+      border: none;
+      border-radius: 5px;
+      background: rgba(23, 22, 22, 0.61);
+      color: white;
+      cursor: pointer;
+    }
   }
 
   .hidden {
     visibility: hidden;
   }
-
 
   @media (max-width: 1024px) {
     font-size: calc(100vw / 768 * 10);
@@ -55,15 +62,10 @@ html {
     font-size: calc(100vw / 375 * 10);
   }
 
-
 }
-
-
-
 .container {
-
-  max-width: 1200px;
   margin: 0 auto;
+  max-width: 1200px;
   flex-direction: column;
 
   .day {
@@ -73,27 +75,4 @@ html {
   .night {
     background-image: linear-gradient(#91BEF3, #48355B);
   }
-
-
-  @media (min-width: 1024px) {
-
-  }
-
-  @media (min-width: 767px) {
-
-  }
-
 }
-
-
-@media (min-width: 544px) {
-
-}
-
-@media (min-width: 768px) {
-
-}
-
-
-
-//320 px, 480 px, 768 px, 960 px, 1200 px, 1600px.
