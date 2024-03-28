@@ -1,22 +1,23 @@
 .city-list {
+  margin: 0 auto;
   &-wrapper {
     display: flex;
     flex-direction: column;
-
-
     .city {
       cursor: pointer;
-      padding: 0.7rem;
-      margin: 0.4rem;
-      width: 90vw;
-      height: 7vh;
-      border-radius: 15px;
+      padding: 1rem;
+      margin-bottom: 0.7rem;
+      width: 80vw;
+      height: 60px;
+      border-radius: 16px;
       &-description {
         flex-direction: column;
         justify-content: space-between;
         width: 70%;
         &__name {
-          font-size: 1.8rem;
+          font-size: 2rem;
+        }
+        &__description {
         }
       }
       &-temp {
@@ -35,11 +36,13 @@
       }
 
       .remover {
-        background-color: #f51a1a;
-        border-radius: 10px;
-        width: 50px;
+        background-color: rgba(255, 255, 255, 0.04);
+        border-radius: 5px;
+        width: 20px;
+        height: 20px;
         justify-content: center;
         align-items: center;
+
       }
 
     }

@@ -1,3 +1,33 @@
+@mixin widget {
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 160px;
+  height: 140px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.04);
+  margin: 5px;
+  position: relative;
+  .widget-span {
+    font-size: 2.5rem;
+    .widget-pressure {
+      font-size: 1.2rem;
+    }
+  }
+  .widget-description {
+    display: inline-block;
+    align-items: baseline;
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    font-size: 1.2rem;
+  }
+  @media (max-width: 400px) {
+    width: 140px;
+    height: 120px;
+  }
+}
+
 .weather-details {
   display: flex;
   flex-direction: column;
@@ -7,60 +37,59 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 0.5rem;
-    border-radius: 10px;
+    padding: 1rem;
     &__add {
       flex-direction: row-reverse;
-      color: blue;
-      font-size: 1rem;
       cursor: pointer;
     }
     &-name {
       flex-direction: column;
       align-items: center;
-      &__name {
+      &__city {
         font-size: 3rem;
-      }
-      &__district {
-
       }
     }
     &-temp {
       flex-direction: column;
       align-items: center;
       &__now {
-        font-size: 4rem;
+        font-size: 5rem;
+      }
+      &__maxmin {
+      }
+      &__description {
+        display: flex;
+        margin: 0.5rem;
+        font-size: 1.5rem;
       }
       &__feels {
-
       }
     }
     &-description {
       flex-direction: column;
       flex-wrap: wrap;
-      &__clouds {
-        flex-grow: 1;
-
-      }
-      &__wind {
-        flex: 1 1 calc(100% / 3);
-        flex-direction: column;
-        align-items: center;
-      }
-      &__visibility {
-        flex: 1 1 calc(100% / 3);
-        flex-direction: column;
-        align-items: center;
-      }
-      &__pressure {
-        flex: 1 1 calc(100% / 3);
-        flex-direction: column;
-        align-items: center;
+      &__wind, &__visibility, &__pressure{
+        @include widget;
       }
       &__wrapper {
-        justify-content: space-between;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 0.5rem 0;
       }
     }
+
+  }
+
+
+  @media (max-width: 1024px) {
+
+  }
+
+  @media (max-width: 767px) {
+
+  }
+
+  @media (max-width: 500px) {
 
   }
 }

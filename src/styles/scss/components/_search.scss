@@ -1,7 +1,8 @@
 .search {
-  margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  margin: 2rem auto;
   &-form {
-    padding: 0;
     &__input {
       width: 90vw;
       max-width: 400px;
@@ -9,21 +10,37 @@
       border-radius: 10px;
       border: none;
       background-color: rgba(255, 255, 255, 0.15);
-      padding: 0 0.3rem;
+      padding-left: 1rem;
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.47);
+      }
+      &:focus {
+        outline: none;
+        color: white;
+      }
     }
   }
   &-btn {
-    border-radius: 10px;
-    height: 25px;
+    margin-top: 0.5rem;
+    justify-content: flex-end;
+    top: 40px;
+    right: 0;
+    cursor: pointer;
+    &__find {
+      border: none;
+      background: none;
+      cursor: pointer;
+    }
   }
   .search-list {
     display: flex;
     flex-direction: column;
     padding: 0.5rem;
     .suggestion {
-      height: 1.5rem;
+      height: 1.7rem;
       cursor: pointer;
       &__flag {
+        margin-left: 0.3rem;
         width: 1.4rem;
         height: 1rem;
       }

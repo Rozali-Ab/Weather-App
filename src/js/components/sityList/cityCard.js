@@ -81,8 +81,8 @@ const cityTemplate = (cityCard) => {
                 />
             </div>
             <div class="remover ">
-                <span class="remover__span">X</span>
-            </div>
+               <span class="remover__span">&#10006;</span>
+            </div> 
       </div>
     `
   )
