@@ -6,9 +6,6 @@
     <title>Weather App</title>
 </head>
 <body>
-<header>
-    <h4>Погода сегодня</h4>
-</header>
 <main class="main" id="main">
     <div class="container">
         <section class="weather-details">
@@ -18,13 +15,23 @@
                 <label for="search_input">
                     <input
                             type="text"
+                            pattern="[A-Za-zА-Яа-я\s]+"
+                            required
                             class="search-form__input"
                             placeholder="Введите название населенного пункта"
                             id="search_input"
                     />
                 </label>
             </form>
-            <button class="search-btn find-me">Найти меня</button>
+            <div class="search-btn find-me">
+                <span>Где я?</span>
+                <button class="search-btn__find find-me">
+                    <svg width="20" height="20" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1.75098 6.57324L5.63428 6.58936C5.7041 6.58936 5.72559 6.6001 5.72559 6.67529L5.73096 10.5371C5.73096 11.4448 6.86426 11.6543 7.27246 10.7734L11.2256 2.22266C11.6445 1.31494 10.9355 0.691895 10.0547 1.1001L1.46094 5.06396C0.655273 5.43457 0.821777 6.56787 1.75098 6.57324Z"
+                              fill="white"/>
+                    </svg>
+                </button>
+            </div>
             <div class="search-list"></div>
         </section>
 
@@ -38,5 +45,6 @@
         </div>
     </div>
 </main>
+<footer class="footer">Weather today</footer>
 </body>
 </html>

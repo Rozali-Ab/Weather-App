@@ -5,7 +5,7 @@ import { renderWeatherDetails } from "../weatherDetails/weatherDetails";
 import { showErrorMessage } from "../error/error";
 
 export const addFindMeEvent = () => {
-  const findMeBtn = document.querySelector('.search-btn.find-me');
+  const findMeBtn = document.querySelector('.find-me');
   findMeBtn.addEventListener('click', onClickFindMeBtn);
 };
 

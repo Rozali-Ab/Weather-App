@@ -1,9 +1,24 @@
 html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
   font-size: calc(100vw / 1920 * 20);
-  background-color: black;
+  background-color: #000;
+  font-family: "Roboto";
   color: white;
-
-
+  body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    main {
+      flex: 1;
+    }
+    footer {
+      flex-shrink: 0;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+  }
   div {
     display: flex;
   }
@@ -24,7 +39,7 @@ html {
   }
 
   .hidden {
-    display: none;
+    visibility: hidden;
   }
 
 
@@ -47,29 +62,27 @@ html {
 
 .container {
 
-  max-width: 100%;
-  padding: 0 0.5rem;
+  max-width: 1200px;
   margin: 0 auto;
   flex-direction: column;
 
   .day {
-    background-image: linear-gradient(to top right, rgba(238, 170, 122, 0.62), rgba(246, 242, 52, 0.33));
+    background-image: linear-gradient(to top right, #f88fbd, #f5b951);
   }
 
   .night {
-    background-image: linear-gradient(to top right, rgba(145, 190, 243, 0.94), rgba(5, 13, 75, 0.33));
+    background-image: linear-gradient(#91BEF3, #48355B);
   }
 
 
-  @media (max-width: 1024px) {
+  @media (min-width: 1024px) {
 
   }
 
-  @media (max-width: 767px) {
+  @media (min-width: 767px) {
+
   }
 
-  @media (max-width: 500px) {
-  }
 }
 
 
