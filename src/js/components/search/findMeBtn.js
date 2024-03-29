@@ -1,6 +1,4 @@
-import { store } from "../../store/store";
-import { saveLocationToLocalStorage, saveWeatherToLocalStorage } from "../../store/localStore";
-import { getWeatherByLocation } from "../../api/api";
+import { store } from "../../../index";
 import { renderWeatherDetails } from "../weatherDetails/weatherDetails";
 import { showErrorMessage } from "../error/error";
 
@@ -11,11 +9,7 @@ export const addFindMeEvent = () => {
 
 const onClickFindMeBtn = async () => {
   try {
-    store.currentGeo = await getUserLocation();
-    saveLocationToLocalStorage(store.currentGeo);
-
-    store.currentWeather = await getWeatherByLocation(store.currentGeo);
-    saveWeatherToLocalStorage(store.currentWeather);
+    await store.getWeatherByLocation(await getUserLocation());
 
     renderWeatherDetails();
   } catch (error) {

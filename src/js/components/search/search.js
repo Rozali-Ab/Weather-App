@@ -1,9 +1,7 @@
-import { getWeatherByCity } from '../../api/api.js';
 import { delayedSuggestion, removeSuggest } from './suggestion.js';
 
-import { store } from '../../store/store.js';
+import { store } from "../../../index";
 import { renderWeatherDetails } from "../weatherDetails/weatherDetails";
-import { saveWeatherToLocalStorage } from "../../store/localStore";
 import { showErrorMessage } from "../error/error";
 
 const form = document.querySelector('.search-form');
@@ -31,19 +29,14 @@ const onFormSubmit = async (evt) => {
 
   const form = evt.target;
   let query = input.value;
-
   try {
-    showCurrentWeather(await getWeatherByCity(query))
+    await store.getWeatherByCityName(query);
   } catch (err) {
     showErrorMessage('По Вашему запросу ничего не найдено');
+
+  } finally {
+    renderWeatherDetails();
+    form.reset();
+    removeSuggest();
   }
-
-  form.reset();
-  removeSuggest();
 };
-
-const showCurrentWeather = (weather) => {
-  store.currentWeather = weather;
-  saveWeatherToLocalStorage(weather);
-  renderWeatherDetails();
-}

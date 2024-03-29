@@ -1,58 +1,46 @@
-import { store } from "../../store/store";
+import { store } from "../../../index";
 import { renderWeatherDetails } from "../weatherDetails/weatherDetails";
-import { saveCityListToLocalStorage, saveWeatherToLocalStorage } from "../../store/localStore";
-import { renderCityList } from "./cityList";
 
 export const renderCityCard = (city) => {
   const container = document.querySelector('.city-list-wrapper');
-  container.insertAdjacentHTML('beforeend', cityTemplate(city));
+  const cityCard = document.createElement('div');
 
-  const lastCityElement = container.lastElementChild;
-  const btnDelete = lastCityElement.querySelector('.remover');
+  cityCard.insertAdjacentHTML('beforeend', cityTemplate(city));
 
-  lastCityElement.addEventListener('click', async () => {
+  const firstCityElement = cityCard.firstElementChild;
+  const btnDelete = cityCard.lastElementChild;
+
+  firstCityElement.addEventListener('click', async () => {
     await onClickCityCard(city);
   });
 
-  btnDelete.addEventListener('click', async (evt) => {
+  btnDelete.addEventListener('click', (evt) => {
     evt.stopPropagation();
 
-    await onDeleteCityCard(city);
+    onDeleteCityCard(city);
+    container.removeChild(cityCard);
   });
+
+  container.appendChild(cityCard);
 }
 
 
-const onClickCityCard = (cityCard) => {
-  store.currentWeather = cityCard;
-  saveWeatherToLocalStorage(cityCard);
+const onClickCityCard = async (cityCard) => {
+  store.updateCurrentWeather(cityCard);
   renderWeatherDetails();
-  renderCityList();
 };
 
-const onDeleteCityCard = (card) => {
-  if (store.cityList.length === 0) {
-    saveCityListToLocalStorage();
-    renderCityList();
-    return;
-  }
-
-  const index = store.cityList.findIndex(city => city.id === card.id);
-  if (index !== -1) {
-    store.cityList.splice(index, 1);
-
-    saveCityListToLocalStorage(store.cityList);
-  }
-  renderWeatherDetails();
-  renderCityList();
+const onDeleteCityCard = ({ id, isSaved }) => {
+  isSaved = false;
+  store.deleteCityFromListById(id);
 };
 
 const cityTemplate = (cityCard) => {
   const {
     id,
     city,
-
     description,
-    temp,
+    temperature,
     icon,
     timeOfDay
   } = cityCard;
@@ -71,7 +59,7 @@ const cityTemplate = (cityCard) => {
             </div>
             <div class="city-temp">
                 <span class="city-temp__now">
-                    ${temp}
+                    ${temperature.now}
                 </span>
             </div>
             <div class="city-icon">
@@ -80,10 +68,11 @@ const cityTemplate = (cityCard) => {
                     alt="weather"
                 />
             </div>
-            <div class="remover ">
-               <span class="remover__span">&#10006;</span>
-            </div> 
+            
       </div>
+      <button class="remover">
+         <span class="remover__span">&#10006;</span>
+      </button>
     `
   )
 }

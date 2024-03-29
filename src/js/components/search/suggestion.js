@@ -1,68 +1,80 @@
-import { store } from '../../store/store.js';
-import { getCitySuggestion, getWeatherByLocation } from '../../api/api.js';
+import { store } from "../../../index";
 import { debounce } from '../../utils/debounce.js';
-import { saveWeatherToLocalStorage } from '../../store/localStore.js';
-import { renderWeatherDetails } from "../weatherDetails/weatherDetails";
+import { getCitySuggestion } from '../../api/api.js';
 
 import { DELAY_SUGGESTION } from '../../constants/const.js';
+import { showLoader } from "../loader/loader";
+import { renderWeatherDetails } from "../weatherDetails/weatherDetails";
+import { renderCityList } from "../sityList/cityList";
+import { showErrorMessage } from "../error/error";
+
+
+const container = document.querySelector('.search-list');
+const input = document.querySelector('.search-form__input');
 
 export const delayedSuggestion = debounce(async (query) => {
+  store.setIsLoading(true);
+  showLoader();
   try {
     const suggest = await getCitySuggestion(query);
     renderSuggest(suggest);
     return suggest;
   } catch (error) {
     return null;
+  } finally {
+    store.setIsLoading(false);
+    showLoader();
   }
 }, DELAY_SUGGESTION);
 
 const renderSuggest = (suggest) => {
-  if (!suggest) return;
-
-  const container = document.querySelector('.search-list');
   container.innerHTML = '';
+
+  if (!suggest || suggest.length === 0) {
+    container.textContent = 'Ничего не найдено';
+    setTimeout(() => {
+      container.innerHTML = ''
+    }, 2000);
+  }
 
   if (Array.isArray(suggest)) {
     suggest.forEach((item) => {
       const suggestElement = document.createElement('div');
       suggestElement.innerHTML = suggestTemplate(item);
-      container.appendChild(suggestElement);
 
       suggestElement.addEventListener('click', async () => {
+        console.log(item)
         await onClickSuggest(item);
       });
+      container.appendChild(suggestElement);
     });
+  }
+
+  if (!store.getIsLoading()) {
+    removeSuggest();
   }
 };
 
 export const removeSuggest = () => {
-  const input = document.querySelector('.search-form__input');
-  const container = document.querySelector('.search-list');
   container.innerHTML = '';
   input.value = '';
 }
 
-export const onClickSuggest = async (suggest) => {
-  const location = {
-    lon: suggest.lon,
-    lat: suggest.lat,
-  };
-
+export const onClickSuggest = async ({ location }) => {
   try {
-    const weather = await getWeatherByLocation(location);
-    if (weather) {
-      store.currentWeather = weather;
-      saveWeatherToLocalStorage(weather);
-      renderWeatherDetails(weather);
-    }
-  } catch (error) {
-    console.error(error);
+    const city = await store.getWeatherByLocation(location);
+    city.isSaved = true;
+    store.addCityToList(city);
+    renderCityList();
+    renderWeatherDetails();
+  } catch (err) {
+    showErrorMessage('Не удалось добавить в список')
+    throw err;
   }
-
   removeSuggest();
 };
 
-const suggestTemplate = ({ city, district, country }) => {
+const suggestTemplate = ({ city, district, country, location }) => {
   return (
     `
       <div class="suggestion">
@@ -77,6 +89,7 @@ const suggestTemplate = ({ city, district, country }) => {
             src="https://openweathermap.org/images/flags/${country}.png" 
              alt="flag"
         />
+        <button>Добавить</button>
       </div>
     `
   )
