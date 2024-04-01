@@ -1,5 +1,6 @@
 import { store } from "../../../index";
 import { renderWeatherDetails } from "../weatherDetails/weatherDetails";
+import { getTextTimeFromUpdate } from "../../utils/getTextTimeFromUpdate";
 
 export const renderCityCard = (city) => {
   const container = document.querySelector('.city-list-wrapper');
@@ -42,36 +43,40 @@ const cityTemplate = (cityCard) => {
     description,
     temperature,
     icon,
-    timeOfDay
+    timeOfDay,
+    updatedAt,
   } = cityCard;
 
+  const updatedTime = getTextTimeFromUpdate(updatedAt);
 
   return (
     `
-        <div class="city ${timeOfDay}" data-id="${id}">
-            <div class="city-description">
-                <span class="city-description__name">
-                    ${city}
-                </span>
-                <span class="city-description__description">
-                    ${description}
-                </span>
-            </div>
-            <div class="city-temp">
-                <span class="city-temp__now">
-                    ${temperature.now}
-                </span>
-            </div>
-            <div class="city-icon">
-                <img 
-                    src="https://openweathermap.org/img/wn/${icon}.png"
-                    alt="weather"
-                />
-            </div>
-            
+      <div class="city ${timeOfDay}" data-id="${id}">
+        <div class="city-description">
+            <span class="city-description__name">
+                ${city}
+            </span>
+            <span class="city-description__description">
+                ${description}
+            </span>
+        </div>
+        <div class="city-temp">
+            <span class="city-temp__now">
+                ${temperature.now} °
+            </span>
+        </div>
+        <div class="city-icon">
+            <img 
+                src="https://openweathermap.org/img/wn/${icon}.png"
+                alt="weather"
+            />
+        </div>
+        <span class="city-description__updated">
+            Обновлено ${updatedTime}
+        </span>
       </div>
       <button class="remover">
-         <span class="remover__span">&#10006;</span>
+         &#10006;
       </button>
     `
   )

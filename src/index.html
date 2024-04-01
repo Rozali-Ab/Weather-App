@@ -15,7 +15,6 @@
                 <label for="search_input">
                     <input
                             type="text"
-                            pattern="[A-Za-zА-Яа-я\s]+"
                             required
                             class="search-form__input"
                             placeholder="Введите название населенного пункта"
@@ -32,6 +31,7 @@
                     </svg>
                 </button>
             </div>
+            <span class="loader hidden" id="loader"></span>
             <div class="search-list"></div>
         </section>
 

@@ -1,17 +1,18 @@
 @mixin widget {
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   width: 160px;
   height: 140px;
   border-radius: 10px;
+  //box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.21);
   background-color: rgba(255, 255, 255, 0.04);
   margin: 5px;
   position: relative;
   .widget-span {
     font-size: 2.5rem;
-    .widget-pressure {
-      font-size: 1.2rem;
+    &-unit {
+      font-size: 1.5rem;
     }
   }
   .widget-description {

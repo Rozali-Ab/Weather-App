@@ -2,7 +2,7 @@ import { store } from "../../../index";
 
 import { renderCityList } from "../sityList/cityList";
 
-import { ICONS } from "../../constants/icons";
+import { ICONS_MAP } from "../../constants/icons";
 
 export const renderWeatherDetails = () => {
 
@@ -56,8 +56,8 @@ const weatherDetailsTemplate = (weather) => {
         <span class="weather-name__city">${city}</span>
       </div>
       <div class="weather-temp">
-        <span class="weather-temp__now">${temperature.now}</span>
-        <span class="weather-temp__maxmin">Макс.: ${temperature.max}, мин.: ${temperature.min}</span>
+        <span class="weather-temp__now">${temperature.now} &#xb0;</span>
+        <span class="weather-temp__maxmin">Макс.: ${temperature.max} &#xb0;, мин.: ${temperature.min} &#xb0;</span>
         <span class="weather-temp__description">${description}</span>
         <span class="weather-temp__feels">Ощущается как ${temperature.feelsLike}</span>
       </div>
@@ -65,19 +65,22 @@ const weatherDetailsTemplate = (weather) => {
         <div class="weather-description__wrapper">
           <div class="weather-description__wind">
             <span class="widget-span">${wind.speed}</span>
-            <!--   <span class="widget-description">${ICONS.Wind} Ветер</span> -->
+            <span class="widget-span-unit">м/с</span>
+            <span class="widget-description">${ICONS_MAP.WIND} Ветер</span>
           </div>
           <div class="weather-description__visibility">
             <span class="widget-span">${visibility}</span>
-            <!--    <span class="widget-description">${ICONS.Visibility} Видимость</span> -->
+            <span class="widget-span-unit">км</span>
+            <span class="widget-description">${ICONS_MAP.VISIBILITY} Видимость</span>
           </div>
           <div class="weather-description__pressure">
-            <span class="widget-span">${pressure} <span class="widget-pressure">мм рт.ст.</span></span>
-            <!--   <span class="widget-description">${ICONS.Pressure} Давление</span> -->
+            <span class="widget-span">${pressure}</span>
+            <span class="widget-span-unit">мм рт.ст.</span>
+            <span class="widget-description">${ICONS_MAP.PRESSURE} Давление</span>
           </div>
           <div class="weather-description__pressure">
-            <span class="widget-span">${humidity}</span>
-           <!--    <span class="widget-description">${ICONS.Humidity} Влажность</span> -->
+            <span class="widget-span">${humidity} %</span>
+            <span class="widget-description">${ICONS_MAP.HUMIDITY} Влажность</span>
           </div>
         </div>
       </div>
