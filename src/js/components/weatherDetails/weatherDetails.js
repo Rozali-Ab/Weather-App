@@ -59,7 +59,7 @@ const weatherDetailsTemplate = (weather) => {
         <span class="weather-temp__now">${temperature.now} &#xb0;</span>
         <span class="weather-temp__maxmin">Макс.: ${temperature.max} &#xb0;, мин.: ${temperature.min} &#xb0;</span>
         <span class="weather-temp__description">${description}</span>
-        <span class="weather-temp__feels">Ощущается как ${temperature.feelsLike}</span>
+        <span class="weather-temp__feels">Ощущается как ${temperature.feelsLike} &#xb0;</span>
       </div>
       <div class="weather-description">
         <div class="weather-description__wrapper">

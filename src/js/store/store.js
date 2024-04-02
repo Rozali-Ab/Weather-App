@@ -1,4 +1,6 @@
 import { getDataByCity, getDataByLocation } from "../api/api";
+import { isNeedToUpdate } from "../utils/updateWether";
+import { WEATHER_UPDATE_INTERVAL } from "../constants/const";
 
 export default class Store {
   constructor() {
@@ -7,6 +9,10 @@ export default class Store {
     this._isLoading = false;
 
     this.getDataFromLocalStorage();
+
+    setInterval(async () => {
+      await this.updateStore();
+    }, WEATHER_UPDATE_INTERVAL);
   }
 
   getCurrentWeather() {
@@ -74,7 +80,7 @@ export default class Store {
 
   addCityToList(city) {
     this.getCityList().push(city);
-    this.setCityListToLocalStorage(this.getCityList());
+    this.setCityListToLocalStorage();
   }
 
   deleteCityFromListById(id) {
@@ -94,6 +100,52 @@ export default class Store {
 
   updateCityList(updatedList) {
     this.setCityList(updatedList);
-    this.setCityListToLocalStorage(updatedList);
+    this.setCityListToLocalStorage();
   }
+
+  async updateData(city) {
+    const { updatedAt, coordinates } = city;
+    if (isNeedToUpdate(updatedAt)) {
+      try {
+        return await getDataByLocation(coordinates);
+      } catch (err) {
+        console.error(err);
+      }
+    } else return city;
+  }
+
+  async updateStore() {
+    try {
+      const currentWeather = this.getCurrentWeather();
+      const currentList = this.getCityList();
+
+      console.log('Current weather:', currentWeather);
+      console.log('Current list:', currentList);
+
+      if (currentWeather && isNeedToUpdate(currentWeather.updatedAt)) {
+        console.log('Updating current weather...');
+        const updatedWeather = await this.getWeatherByLocation(currentWeather.coordinates);
+        await this.updateCurrentWeather(updatedWeather);
+        console.log('Updated weather: ', updatedWeather)
+      }
+
+      if (currentList) {
+        const updated = await Promise.all(
+          currentList.map(
+            async (item) => {
+              const updatedItem = await this.updateData(item);
+              updatedItem.isSaved = true;
+              return updatedItem;
+            }
+          )
+        );
+        await this.updateCityList(updated);
+        console.log('updateStore(): ', updated)
+      }
+    } catch (error) {
+      console.error('Ошибка при обновлении данных:', error);
+    }
+  }
+
+
 }
