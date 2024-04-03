@@ -1,9 +1,5 @@
 import { store } from "../../../index";
 
-import { renderCityList } from "../sityList/cityList";
-
-import { ICONS_MAP } from "../../constants/icons";
-
 export const renderWeatherDetails = () => {
 
   const weather = store.getCurrentWeather();
@@ -28,8 +24,6 @@ const onClickAddBtn = (city) => {
 
   store.updateCurrentWeather(city);
   store.addCityToList(city);
-  renderCityList();
-  renderWeatherDetails();
 }
 
 const weatherDetailsTemplate = (weather) => {
@@ -40,7 +34,6 @@ const weatherDetailsTemplate = (weather) => {
     wind,
     visibility,
     pressure,
-    id,
     timeOfDay,
     humidity,
     isSaved
@@ -66,21 +59,45 @@ const weatherDetailsTemplate = (weather) => {
           <div class="weather-description__wind">
             <span class="widget-span">${wind.speed}</span>
             <span class="widget-span-unit">м/с</span>
-            <span class="widget-description">${ICONS_MAP.WIND} Ветер</span>
+            <span class="widget-description">
+              <img 
+                src="./icons/wind.png" 
+                alt="wind"
+              />
+              Ветер
+            </span>
           </div>
           <div class="weather-description__visibility">
             <span class="widget-span">${visibility}</span>
             <span class="widget-span-unit">км</span>
-            <span class="widget-description">${ICONS_MAP.VISIBILITY} Видимость</span>
+            <span class="widget-description"> 
+              <img 
+                src="./icons/visibility.png" 
+                alt="visibility"
+              />
+              Видимость
+            </span>
           </div>
           <div class="weather-description__pressure">
             <span class="widget-span">${pressure}</span>
             <span class="widget-span-unit">мм рт.ст.</span>
-            <span class="widget-description">${ICONS_MAP.PRESSURE} Давление</span>
+            <span class="widget-description">
+              <img 
+                src="./icons/pressure.png" 
+                alt="pressure"
+              /> 
+                Давление
+            </span>
           </div>
           <div class="weather-description__pressure">
             <span class="widget-span">${humidity} %</span>
-            <span class="widget-description">${ICONS_MAP.HUMIDITY} Влажность</span>
+            <span class="widget-description">
+              <img 
+                  src="./icons/humidity.png" 
+                  alt="humidity"
+                /> 
+              Влажность
+            </span>
           </div>
         </div>
       </div>
