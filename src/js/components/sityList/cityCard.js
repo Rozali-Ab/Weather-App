@@ -1,5 +1,4 @@
 import { store } from "../../../index";
-import { renderWeatherDetails } from "../weatherDetails/weatherDetails";
 import { getTextTimeFromUpdate } from "../../utils/getTextTimeFromUpdate";
 
 export const renderCityCard = (city) => {
@@ -19,7 +18,6 @@ export const renderCityCard = (city) => {
     evt.stopPropagation();
 
     onDeleteCityCard(city);
-    container.removeChild(cityCard);
   });
 
   container.appendChild(cityCard);
@@ -28,11 +26,9 @@ export const renderCityCard = (city) => {
 
 const onClickCityCard = async (cityCard) => {
   store.updateCurrentWeather(cityCard);
-  renderWeatherDetails();
 };
 
-const onDeleteCityCard = ({ id, isSaved }) => {
-  isSaved = false;
+const onDeleteCityCard = ({ id }) => {
   store.deleteCityFromListById(id);
 };
 
@@ -67,7 +63,7 @@ const cityTemplate = (cityCard) => {
         </div>
         <div class="city-icon">
             <img 
-                src="https://openweathermap.org/img/wn/${icon}.png"
+                src="./icons/${icon}.png"
                 alt="weather"
             />
         </div>

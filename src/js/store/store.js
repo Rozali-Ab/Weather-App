@@ -1,5 +1,7 @@
 import { getDataByCity, getDataByLocation } from "../api/api";
+import { EventEmitter } from "../eventEmitter/eventEmitter";
 import { isNeedToUpdate } from "../utils/updateWether";
+import { EVENTS_NAME } from "../constants/event";
 import { WEATHER_UPDATE_INTERVAL } from "../constants/const";
 
 export default class Store {
@@ -7,6 +9,7 @@ export default class Store {
     this._currentWeather = {};
     this._cityList = [];
     this._isLoading = false;
+    this.eventEmitter = new EventEmitter();
 
     this.getDataFromLocalStorage();
 
@@ -21,6 +24,7 @@ export default class Store {
 
   setCurrentWeather(weather) {
     this._currentWeather = weather;
+    this.eventEmitter.dispatch(EVENTS_NAME.WEATHER_DETAILS_UPDATED);
   }
 
   getCityList() {
@@ -29,6 +33,7 @@ export default class Store {
 
   setCityList(cityList) {
     this._cityList = cityList;
+    this.eventEmitter.dispatch(EVENTS_NAME.LIST_UPDATED);
   }
 
   getIsLoading() {
@@ -81,6 +86,7 @@ export default class Store {
   addCityToList(city) {
     this.getCityList().push(city);
     this.setCityListToLocalStorage();
+    this.eventEmitter.dispatch(EVENTS_NAME.LIST_UPDATED);
   }
 
   deleteCityFromListById(id) {

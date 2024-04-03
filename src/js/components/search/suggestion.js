@@ -4,8 +4,6 @@ import { getCitySuggestion } from '../../api/api.js';
 
 import { DELAY_SUGGESTION } from '../../constants/const.js';
 import { showLoader } from "../loader/loader";
-import { renderWeatherDetails } from "../weatherDetails/weatherDetails";
-import { renderCityList } from "../sityList/cityList";
 import { showErrorMessage } from "../error/error";
 
 
@@ -65,8 +63,6 @@ export const onClickSuggest = async ({ location }) => {
     const city = await store.getWeatherByLocation(location);
     city.isSaved = true;
     store.addCityToList(city);
-    renderCityList();
-    renderWeatherDetails();
   } catch (err) {
     showErrorMessage('Не удалось добавить в список')
     throw err;
@@ -78,18 +74,19 @@ const suggestTemplate = ({ city, district, country, location }) => {
   return (
     `
       <div class="suggestion">
+        <img
+          class="suggestion__flag"
+          src="https://openweathermap.org/images/flags/${country}.png" 
+          alt="flag"
+        />
         <span class="suggestion__city">
             ${city}
         </span>
         <span class="suggestion__district">
             , ${district} 
           </span>
-        <img
-            class="suggestion__flag"
-            src="https://openweathermap.org/images/flags/${country}.png" 
-             alt="flag"
-        />
-        <button>Добавить</button>
+
+        <button class="suggestion-add">+</button>
       </div>
     `
   )

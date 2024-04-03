@@ -1,7 +1,6 @@
 import { delayedSuggestion, removeSuggest } from './suggestion.js';
 
 import { store } from "../../../index";
-import { renderWeatherDetails } from "../weatherDetails/weatherDetails";
 import { showErrorMessage } from "../error/error";
 
 const form = document.querySelector('.search-form');
@@ -35,7 +34,6 @@ const onFormSubmit = async (evt) => {
     showErrorMessage('По Вашему запросу ничего не найдено');
 
   } finally {
-    renderWeatherDetails();
     form.reset();
     removeSuggest();
   }

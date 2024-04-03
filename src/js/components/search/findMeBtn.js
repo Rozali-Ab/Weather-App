@@ -1,5 +1,4 @@
 import { store } from "../../../index";
-import { renderWeatherDetails } from "../weatherDetails/weatherDetails";
 import { showErrorMessage } from "../error/error";
 
 export const addFindMeEvent = () => {
@@ -11,7 +10,6 @@ const onClickFindMeBtn = async () => {
   try {
     await store.getWeatherByLocation(await getUserLocation());
 
-    renderWeatherDetails();
   } catch (error) {
     showErrorMessage(error.message)
   }
