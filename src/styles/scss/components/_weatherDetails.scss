@@ -1,0 +1,86 @@
+@mixin widget {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 160px;
+  height: 140px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.04);
+  margin: 5px;
+  position: relative;
+  .widget-span {
+    font-size: 2.5rem;
+    &-unit {
+      font-size: 1.5rem;
+    }
+  }
+  .widget-description {
+    display: inline-block;
+    align-items: baseline;
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    font-size: 1.2rem;
+    & img {
+      max-width: 20px;
+      max-height: 20px;
+    }
+  }
+  @media (max-width: 400px) {
+    width: 140px;
+    height: 120px;
+  }
+}
+
+.weather-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+
+  .weather {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1rem;
+    &__add {
+      flex-direction: row-reverse;
+      cursor: pointer;
+    }
+    &-name {
+      flex-direction: column;
+      align-items: center;
+      &__city {
+        font-size: 3rem;
+      }
+    }
+    &-temp {
+      flex-direction: column;
+      align-items: center;
+      &__now {
+        font-size: 5rem;
+      }
+      &__maxmin {
+      }
+      &__description {
+        display: flex;
+        margin: 0.5rem;
+        font-size: 1.5rem;
+      }
+      &__feels {
+      }
+    }
+    &-description {
+      flex-direction: column;
+      flex-wrap: wrap;
+      &__wind, &__visibility, &__pressure{
+        @include widget;
+      }
+      &__wrapper {
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 0.5rem 0;
+      }
+    }
+  }
+}
