@@ -1,4 +1,4 @@
-import { store } from "../../../index";
+import { store } from '../../../index';
 
 const loader = document.getElementById('loader');
 
@@ -10,4 +10,4 @@ export const showLoader = () => {
   } else {
     loader.classList.add('hidden');
   }
-}
+};

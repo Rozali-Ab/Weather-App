@@ -1,11 +1,9 @@
-import { store } from "../../../index";
+import { store } from '../../../index';
 import { debounce } from '../../utils/debounce.js';
 import { getCitySuggestion } from '../../api/api.js';
-
+import { showLoader } from '../loader/loader';
+import { showErrorMessage } from '../error/error';
 import { DELAY_SUGGESTION } from '../../constants/const.js';
-import { showLoader } from "../loader/loader";
-import { showErrorMessage } from "../error/error";
-
 
 const container = document.querySelector('.search-list');
 const input = document.querySelector('.search-form__input');
@@ -31,7 +29,7 @@ const renderSuggest = (suggest) => {
   if (!suggest || suggest.length === 0) {
     container.textContent = 'Ничего не найдено';
     setTimeout(() => {
-      container.innerHTML = ''
+      container.innerHTML = '';
     }, 2000);
   }
 
@@ -41,7 +39,6 @@ const renderSuggest = (suggest) => {
       suggestElement.innerHTML = suggestTemplate(item);
 
       suggestElement.addEventListener('click', async () => {
-        console.log(item)
         await onClickSuggest(item);
       });
       container.appendChild(suggestElement);
@@ -56,21 +53,19 @@ const renderSuggest = (suggest) => {
 export const removeSuggest = () => {
   container.innerHTML = '';
   input.value = '';
-}
+};
 
 export const onClickSuggest = async ({ location }) => {
   try {
     const city = await store.getWeatherByLocation(location);
-    city.isSaved = true;
     store.addCityToList(city);
   } catch (err) {
-    showErrorMessage('Не удалось добавить в список')
-    throw err;
+    showErrorMessage(err.message);
   }
   removeSuggest();
 };
 
-const suggestTemplate = ({ city, district, country, location }) => {
+const suggestTemplate = ({ city, district, country }) => {
   return (
     `
       <div class="suggestion">
@@ -89,5 +84,5 @@ const suggestTemplate = ({ city, district, country, location }) => {
         <button class="suggestion-add">+</button>
       </div>
     `
-  )
-}
+  );
+};

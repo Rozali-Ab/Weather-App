@@ -1,5 +1,6 @@
 const path = require('path');
-const CopyPlugin = require("copy-webpack-plugin");
+
+const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const Dotenv = require('dotenv-webpack');
@@ -8,7 +9,7 @@ const mode = process.env.mode || 'development';
 const devMode = mode === 'development';
 const devtool = devMode ? 'eval' : undefined;
 
-module.exports = (env) => {
+module.exports = () => {
   return {
     mode,
     devtool,
@@ -26,7 +27,7 @@ module.exports = (env) => {
     },
     plugins: [
       new CopyPlugin({
-        patterns: [{ from: 'public' }],
+        patterns: [{ from: 'public', to: 'assets' }],
       }),
       new HtmlWebpackPlugin({
         template: path.resolve(__dirname, 'src', 'index.html'),
@@ -66,12 +67,12 @@ module.exports = (env) => {
             loader: 'babel-loader',
             options: {
               presets: [
-                ['@babel/preset-env', { targets: "defaults" }]
+                ['@babel/preset-env', { targets: 'defaults' }]
               ]
             }
           }
         }
       ],
     },
-  }
-}
+  };
+};

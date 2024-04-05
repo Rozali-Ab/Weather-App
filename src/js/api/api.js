@@ -1,16 +1,15 @@
 import { transformResponse, transformSuggestion } from './transformResponse.js';
-import { showLoader } from "../components/loader/loader";
-import { store } from "../../index";
+import { showLoader } from '../components/loader/loader';
+import { store } from '../../index';
 
 const URL_MAIN = process.env.URL_MAIN;
 const URL_MAIN_KEY = process.env.URL_MAIN_KEY;
 const URL_SUGGESTION = process.env.URL_SUGGESTION;
 
-
 const fetchData = async (params) => {
   store.setIsLoading(true);
   showLoader();
-  const url = `${URL_MAIN}${(params.toString())}`
+  const url = `${URL_MAIN}${(params.toString())}`;
 
   try {
     const response = await fetch(url);
@@ -22,7 +21,7 @@ const fetchData = async (params) => {
     store.setIsLoading(false);
     showLoader();
   }
-}
+};
 export const getDataByLocation = async (location) => {
   const { lon, lat } = location;
 

@@ -1,9 +1,10 @@
 const SHOW_TIME = 5000;
 
 export const showErrorMessage = (message) => {
-  const container = document.createElement('div');
-  container.textContent = message;
-  container.classList.add('toast');
+  const container = document.querySelector('.container');
+  const errorElement = document.createElement('div');
+  errorElement.textContent = message;
+  errorElement.classList.add('toast');
 
   const closeBtn = document.createElement('button');
   closeBtn.textContent = 'OK';
@@ -12,11 +13,11 @@ export const showErrorMessage = (message) => {
     container.classList.add('hidden');
   });
 
-  container.append(closeBtn);
-  document.body.append(container);
+  errorElement.append(closeBtn);
+  container.appendChild(errorElement);
 
   setTimeout(() => {
-    container.remove();
+    errorElement.remove();
   }, SHOW_TIME);
 
 };

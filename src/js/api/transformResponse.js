@@ -19,7 +19,7 @@ export const transformResponse = (data) => {
     timeOfDay: getTimeOfDay(data.weather[0].icon) || 'none',
     updatedAt: new Date(),
     isSaved: false,
-  }
+  };
 };
 
 export const transformSuggestion = (data) => {
@@ -48,8 +48,8 @@ const convertPressureToMmHg = (pressure) => {
 
 const getTimeOfDay = (string) => {
   return string.includes('d') ? 'day' : 'night';
-}
+};
 
 const getFirstCharToUpperCase = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
-}
+};

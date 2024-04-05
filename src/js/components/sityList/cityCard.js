@@ -1,5 +1,5 @@
-import { store } from "../../../index";
-import { getTextTimeFromUpdate } from "../../utils/getTextTimeFromUpdate";
+import { store } from '../../../index';
+import { getTextTimeFromUpdate } from '../../utils/getTextTimeFromUpdate';
 
 export const renderCityCard = (city) => {
   const container = document.querySelector('.city-list-wrapper');
@@ -21,8 +21,7 @@ export const renderCityCard = (city) => {
   });
 
   container.appendChild(cityCard);
-}
-
+};
 
 const onClickCityCard = async (cityCard) => {
   store.updateCurrentWeather(cityCard);
@@ -75,5 +74,5 @@ const cityTemplate = (cityCard) => {
          &#10006;
       </button>
     `
-  )
-}
+  );
+};

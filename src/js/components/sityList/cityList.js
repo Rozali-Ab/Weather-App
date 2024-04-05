@@ -1,7 +1,5 @@
-import { store } from "../../../index";
-
-import { renderCityCard } from "./cityCard";
-
+import { store } from '../../../index';
+import { renderCityCard } from './cityCard';
 
 export const renderCityList = () => {
   const list = store.getCityList();

@@ -27,20 +27,25 @@ div {
 }
 
 .toast {
-  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
   position: fixed;
   left: 50%;
   bottom: 2%;
   transform: translate(-50%, -50%);
-  width: 80%;
+  width: 60vw;
+  min-height: 60px;
   max-width: 590px;
-  margin-bottom: 0.4em;
-  padding: 0.4em;
+  padding: 1rem;
   border-radius: 16px;
   background-color: rgb(49, 48, 48);
   color: rgba(253, 253, 253, 0.62);
   font-size: 1.5rem;
   & button {
+    margin-top: 1rem;
+    width: 100px;
+    height: 3rem;
     border: none;
     border-radius: 5px;
     background: rgba(23, 22, 22, 0.61);

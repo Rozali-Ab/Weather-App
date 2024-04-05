@@ -1,8 +1,9 @@
-import { getDataByCity, getDataByLocation } from "../api/api";
-import { EventEmitter } from "../eventEmitter/eventEmitter";
-import { isNeedToUpdate } from "../utils/updateWether";
-import { EVENTS_NAME } from "../constants/event";
-import { WEATHER_UPDATE_INTERVAL } from "../constants/const";
+import { getDataByCity, getDataByLocation } from '../api/api';
+import { EventEmitter } from '../eventEmitter/eventEmitter';
+import { isNeedToUpdate } from '../utils/updateWether';
+import { EVENTS_NAME } from '../constants/event';
+import { WEATHER_UPDATE_INTERVAL } from '../constants/const';
+import { showErrorMessage } from '../components/error/error';
 
 export default class Store {
   constructor() {
@@ -44,7 +45,6 @@ export default class Store {
     this._isLoading = loading;
   }
 
-
   getDataFromLocalStorage() {
     const storedWeather = localStorage.getItem('currentWeather');
     if (storedWeather) {
@@ -66,15 +66,12 @@ export default class Store {
   }
 
   async getWeatherByLocation(location) {
-    try {
-      const weather = await getDataByLocation(location);
-      if (weather) {
-        this.setCurrentWeather(weather);
-        this.setCurrentWeatherToLocalStorage();
-        return weather;
-      }
-    } catch (err) {
-      throw err
+    const weather = await getDataByLocation(location);
+    if (weather) {
+      weather.isSaved = true;
+      this.setCurrentWeather(weather);
+      this.setCurrentWeatherToLocalStorage();
+      return weather;
     }
   }
 
@@ -84,9 +81,20 @@ export default class Store {
   }
 
   addCityToList(city) {
-    this.getCityList().push(city);
-    this.setCityListToLocalStorage();
-    this.eventEmitter.dispatch(EVENTS_NAME.LIST_UPDATED);
+    const list = this.getCityList();
+    const index = list.findIndex(item => item.id === city.id);
+    const isAddedBefore = index !== -1;
+
+    if (!isAddedBefore && list.length < 10) {
+      city.isSaved = true;
+      list.push(city);
+      this.setCityListToLocalStorage();
+      this.eventEmitter.dispatch(EVENTS_NAME.LIST_UPDATED);
+    } else if (isAddedBefore) {
+      throw new Error('Город уже добавлен в список');
+    } else {
+      throw new Error('Превышено количество городов в списке');
+    }
   }
 
   deleteCityFromListById(id) {
@@ -112,12 +120,10 @@ export default class Store {
   async updateData(city) {
     const { updatedAt, coordinates } = city;
     if (isNeedToUpdate(updatedAt)) {
-      try {
-        return await getDataByLocation(coordinates);
-      } catch (err) {
-        console.error(err);
-      }
-    } else return city;
+      return await getDataByLocation(coordinates);
+    } else {
+      return city;
+    }
   }
 
   async updateStore() {
@@ -125,14 +131,9 @@ export default class Store {
       const currentWeather = this.getCurrentWeather();
       const currentList = this.getCityList();
 
-      console.log('Current weather:', currentWeather);
-      console.log('Current list:', currentList);
-
       if (currentWeather && isNeedToUpdate(currentWeather.updatedAt)) {
-        console.log('Updating current weather...');
         const updatedWeather = await this.getWeatherByLocation(currentWeather.coordinates);
         await this.updateCurrentWeather(updatedWeather);
-        console.log('Updated weather: ', updatedWeather)
       }
 
       if (currentList) {
@@ -146,12 +147,10 @@ export default class Store {
           )
         );
         await this.updateCityList(updated);
-        console.log('updateStore(): ', updated)
       }
-    } catch (error) {
-      console.error('Ошибка при обновлении данных:', error);
+    } catch (_) {
+      showErrorMessage('Не получилось обновить данные о погоде');
     }
   }
-
 
 }

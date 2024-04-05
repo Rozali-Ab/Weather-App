@@ -1,4 +1,5 @@
-import { store } from "../../../index";
+import { store } from '../../../index';
+import { showErrorMessage } from '../error/error';
 
 export const renderWeatherDetails = () => {
 
@@ -17,14 +18,17 @@ export const renderWeatherDetails = () => {
       addBtn.removeEventListener('click', () => onClickAddBtn(weather));
     }
   }
-}
+};
 
 const onClickAddBtn = (city) => {
   city.isSaved = true;
-
-  store.updateCurrentWeather(city);
-  store.addCityToList(city);
-}
+  try {
+    store.updateCurrentWeather(city);
+    store.addCityToList(city);
+  } catch (err) {
+    showErrorMessage(err.message);
+  }
+};
 
 const weatherDetailsTemplate = (weather) => {
   const {

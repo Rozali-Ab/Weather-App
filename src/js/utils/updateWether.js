@@ -7,4 +7,3 @@ export const isNeedToUpdate = (time) => {
 
   return minutes > 5;
 };
-
