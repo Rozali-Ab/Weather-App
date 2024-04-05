@@ -10,7 +10,7 @@ export const showErrorMessage = (message) => {
   closeBtn.textContent = 'OK';
   closeBtn.classList.add('toast__close');
   closeBtn.addEventListener('click', () => {
-    container.classList.add('hidden');
+    errorElement.classList.add('hidden');
   });
 
   errorElement.append(closeBtn);
