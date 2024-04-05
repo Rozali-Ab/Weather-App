@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="assets/f4ef90f2790c3e2e76cf.png" type="image/x-icon">
+    <title>Weather today</title>
+<script defer src="main.2f5dd2790ad035f29c01.js"></script><link href="styles/main.1004165398b6767d514e.css" rel="stylesheet"></head>
+<body>
+<main class="main" id="main">
+    <div class="container">
+        <section class="weather-details">
+        </section>
+        <section class="search">
+            <form class="search-form">
+                <label for="search_input">
+                    <input
+                            type="text"
+                            required
+                            class="search-form__input"
+                            placeholder="Введите название населенного пункта"
+                            id="search_input"
+                    />
+                </label>
+            </form>
+            <div class="search-btn find-me">
+                <span>Где я?</span>
+                <button class="search-btn__find find-me">
+                    <svg width="20" height="20" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1.75098 6.57324L5.63428 6.58936C5.7041 6.58936 5.72559 6.6001 5.72559 6.67529L5.73096 10.5371C5.73096 11.4448 6.86426 11.6543 7.27246 10.7734L11.2256 2.22266C11.6445 1.31494 10.9355 0.691895 10.0547 1.1001L1.46094 5.06396C0.655273 5.43457 0.821777 6.56787 1.75098 6.57324Z"
+                              fill="white"/>
+                    </svg>
+                </button>
+            </div>
+            <span class="loader hidden" id="loader"></span>
+            <div class="search-list"></div>
+        </section>
+
+        <section class="city-list">
+            <div class="city-list-wrapper">
+            </div>
+        </section>
+    </div>
+</main>
+<footer class="footer">Weather today</footer>
+</body>
+</html>
