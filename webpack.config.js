@@ -27,7 +27,7 @@ module.exports = () => {
     },
     plugins: [
       new CopyPlugin({
-        patterns: [{ from: 'public', to: 'assets' }],
+        patterns: [{ from: 'public'}],
       }),
       new HtmlWebpackPlugin({
         template: path.resolve(__dirname, 'src', 'index.html'),
